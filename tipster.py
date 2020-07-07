@@ -10,6 +10,7 @@ GUILD = os.getenv('DISCORD_GUILD')
 
 bot = commands.Bot(command_prefix='+')
 
+# Ignores Rythm and Rythm2 by default
 ignore_list = [235088799074484224, 252128902418268161]
 
 @bot.event
@@ -48,9 +49,9 @@ async def receiving(ctx):
         await ctx.send(f'{ctx.author}, you are already receiving tips.', delete_after=10.0)
     
 @bot.event
-async def on_voice_state_update(member, before=None, after=728703543074095155):
+async def on_voice_state_update(member, before=None, after=369006447910191119):
     
-    if before.channel is None and after.channel.id == 728703543074095155:
+    if before is not after and after.channel.id == 369006447910191119:
     
         if member.id in ignore_list:
             return
@@ -79,13 +80,14 @@ async def on_voice_state_update(member, before=None, after=728703543074095155):
         'If you don\'t teach your children that Paris Hilton should be despised, how will they know?',
         'Only kiss me if you mean it.',
         'Wait 30 minutes after eating before you swim. Or don\'t. You\'re an adult, you decide.',
-        'Don\'t eat that sandwich, it\'s not yours.'
+        'Don\'t eat that sandwich, it\'s not yours.',
+        'Trolls regenerate health when wounded, but are susceptible to fire.'
         ]
     
     
         daily_tip = random.choice(tips_list)
     
-        to_channel = bot.get_channel(728703542629629985)
-        await to_channel.send('-' * 100 + f'Welcome back, {member.name}. Here\'s a tip: \n\n{daily_tip}\n' + '-' * 100, delete_after=30)
+        to_channel = bot.get_channel(369006447910191117)
+        await to_channel.send('-' * 100 + f'Welcome back, {member.name}. Here\'s a tip: \n\n{daily_tip}\n' + '-' * 100, delete_after=120)
 
 bot.run(TOKEN)
