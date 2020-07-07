@@ -51,7 +51,7 @@ async def receiving(ctx):
 @bot.event
 async def on_voice_state_update(member, before=None, after=369006447910191119):
     
-    if before is not after and after.channel.id == 369006447910191119:
+    if after.channel.id == 369006447910191119:
     
         if member.id in ignore_list:
             return
