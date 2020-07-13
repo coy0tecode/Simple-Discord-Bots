@@ -42,6 +42,127 @@ tips_list = [
     'Trolls regenerate health when wounded, but are susceptible to fire.',
     'Always wash your berries before you eat them.'
     ]
+    
+    
+# Phrase lists for creating()
+first = [
+    'Always ',
+    'Never ',
+    'Don\'t ',
+    'Remember to ',
+    'You must ',
+    'Please ',
+    'If you value your life, '
+]
+
+second = [
+    'wash ',
+    'run ',
+    'anger ',
+    'caress ',
+    'validate ',
+    'fight ',
+    'refurbish ',
+    'acquire ',
+    'obliterate ',
+    'reconstitute ',
+    'devour ',
+    'destroy ',
+    'bully ',
+    'create ',
+    'encourage ',
+    'assimilate ',
+    'paint ',
+    'draw ',
+    'operate on ',
+    'kiss ',
+    'work out with ',
+    'make music with ',
+    'remember ',
+    'forget ',
+    'restructure your company because of ',
+    'file for bankruptcy due to ',
+    'purchase a lottery ticket from ',
+    'trust ',
+    'build a house with ',
+    'marry and start a life with ',
+    'elope with ',
+    'steal from ',
+    'go to a jazz club with ',
+    'eat tacos with ',
+    'take advice from ',
+    'get into an argument with ',
+    'blow up the Deathstar with '
+]
+
+third = [
+    '4 grapes ',
+    'an emaciated orphan ',
+    'Batman ',
+    'the drummer from Led Zeppelin ',
+    'Chris Tucker ',
+    'a pelican ',
+    '3 French hens ',
+    'the Partridge family ',
+    'Lewis Black ',
+    'Meatwad ',
+    'the TrickyTipster ',
+    'an angry accountant ',
+    'all past and present members of SNL ',
+    'Master Chief ',
+    'Ice Cube ',
+    'a bowl of oatmeal ',
+    'a wild stallion ',
+    'hundreds of Eastern gray squirrels ',
+    'Van Halen\'s tour bus ',
+    'Eric Cartman ',
+    'the Teletubbies ',
+    'Jesus Christ ',
+    'an alpaca ',
+    'Walt Disney ',
+    'Rihanna ',
+    'Jackie Chan ',
+    'Owen Wilson ',
+    'an abandoned shack ',
+    'the owl from Warcraft ',
+    'Peter Griffin ',
+    'an erupting volcano ',
+    'a large, unidentified fish ',
+    'a bic boi '
+]
+
+fourth = [
+    'on a Tuesday.',
+    'on a Sunday.',
+    'on a Monday.',
+    'indoors.',
+    'outside.',
+    'aboard Air Force One.',
+    'without gloves.',
+    'unless you are fully prepared.',
+    'inside an aquarium.',
+    'aboard a train.',
+    'during a pandemic.',
+    'in the middle of a war.',
+    'during a funeral.',
+    'on the toilet.',
+    'while assembling a jigsaw puzzle.',
+    'while getting a massage.',
+    'at the doctor\'s.',
+    'at your inlaws\' house.',
+    'with anger in your heart.',
+    'under duress.',
+    'during an economic crisis.',
+    'at the movie theatre.',
+    'while strapped.',
+    'at the wheat processing plant.',
+    'during halftime at the SuperBowl.',
+    'on your day off.',
+    'without proper guidance.',
+    'unless you really want to.',
+    'in a magical forest.'
+]
+    
 
 @bot.event
 async def on_ready():
@@ -51,8 +172,10 @@ async def on_ready():
     
 @bot.command(name='info')
 async def bot_info(ctx):
-    await ctx.send('I\'m the Tricky Tipster. Whenever you join General, I\'ll give you a useful tip.')
-    await ctx.send('Use command \'+ignore\' to stop receiving tips. Use command \'+receive\' to start receiving tips again.')
+    await ctx.send('I\'m the Tricky Tipster. Whenever you join General, I\'ll give you a useful tip. ')
+    await ctx.send('Use command \'+ignore\' to stop receiving tips. ' + 
+                   'Use command \'+receive\' to start receiving tips again. ' +
+                   'Use command \'+create\' to generate a randomized tip.')
     
     
 @bot.command(name='ignore')
@@ -77,9 +200,19 @@ async def receiving(ctx):
         await ctx.send(f'{ctx.author} will now receive tips when joining General voice chat.', delete_after=10.0)
     else:
         await ctx.send(f'{ctx.author}, you are already receiving tips.', delete_after=10.0)
+        
+@bot.command(name='create')
+async def creating(ctx):
+
+    line1 = random.choice(first)
+    line2 = random.choice(second)
+    line3 = random.choice(third)
+    line4 = random.choice(fourth)
+    
+    await ctx.send('-' * 100 + '\nHere\'s your custom tip:\n\n' + line1 + line2 + line3 + line4 + '\n' + '-' * 100, delete_after=120)
     
 @bot.event
-async def on_voice_state_update(member, before=channel, after=channel):
+async def on_voice_state_update(member, before, after):
     
     try:
         test_id = after.channel.id
