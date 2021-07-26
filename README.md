@@ -1,6 +1,4 @@
-# Simple-Discord-Bots
+# Tricky Tipster
 Tipster bot for Discord. Gives you tips. Some even consider them valuable life lessons.
 
-
-I shouldn't have named this repo Simple-Discord-Bots. There's only one bot in here. I was going to add another one, but I decided to give it its own repo.
-The bot I'm working on now is definitely NOT simple (for me at least).
+All it needs is your guild id, a voice channel id, and a text channel id. I think. In any case, it's a very simple bot and should be easy to understand.
